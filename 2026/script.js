@@ -26,6 +26,57 @@ const CONFIG = {
   // Dòng chữ nhỏ ở đáy con tem
   stampText: "Bird Day",
 
+  // Các câu chúc ngắn trôi từ dưới lên ở trang Make a Wish.
+  // Thêm / bớt / sửa tuỳ ý — mỗi dòng một câu, nên giữ dưới khoảng 45 ký tự.
+  floatWishes: [
+    "Chúc mừng sinh nhật!",
+    "Chúc bạn luôn khỏe mạnh và bình an",
+    "Mỗi ngày đều là một ngày vui",
+    "Mong mọi ước mơ của bạn thành sự thật",
+    "Tuổi mới, niềm vui mới",
+    "Chúc bạn thành công trên mọi con đường",
+    "Luôn mỉm cười thật tươi nhé",
+    "Hạnh phúc ở lại bên bạn thật lâu",
+    "Công việc thuận lợi, tiền vào như nước",
+    "Chúc bạn luôn được yêu thương",
+    "Giữ mãi trái tim trẻ trung nhé",
+    "Bình yên theo bạn mỗi bước đi",
+    "Gặp thật nhiều may mắn mỗi ngày",
+    "Mong bạn dám mơ và dám làm",
+    "Mọi điều tốt đẹp đang chờ phía trước",
+    "Chúc bạn một sinh nhật thật rực rỡ",
+    "Cười thật nhiều, lo âu thật ít",
+    "Tỏa sáng theo cách của riêng bạn",
+    "Một năm mới thật nhiều niềm vui",
+    "Luôn có người ở bên khi bạn cần",
+    "Bạn xứng đáng với điều tuyệt vời nhất",
+    "Công việc suôn sẻ, lòng nhẹ tênh",
+    "Mong bạn ngủ ngon và mơ đẹp",
+    "Mỗi sớm mai đều đáng mong chờ",
+    "Tình yêu đến đúng người, đúng lúc",
+    "Chúc bạn tuổi mới thật phơi phới",
+    "Cứ đi đi, vũ trụ sẽ lo phần còn lại",
+    "Khỏe người, khỏe lòng, khỏe cả ví",
+    "Mong bạn luôn là phiên bản vui nhất",
+    "Dám theo đuổi, ước mơ sẽ thành thật",
+    "Nhiều bất ngờ dễ thương đang đến",
+    "Chúc bạn một năm thật bình yên",
+    "Đừng quên tự thưởng cho mình nhé",
+    "Thanh xuân của bạn thật đẹp",
+    "Vạn sự như ý, tâm an vui",
+    "Mong bạn luôn tìm thấy niềm vui nhỏ",
+    "Ước gì được nấy nhé",
+    "Chúc bạn luôn đủ đầy và an yên",
+    "Mọi nỗ lực đều sẽ nở hoa",
+    "Thêm một tuổi, thêm một chút tuyệt vời",
+    "Gió thuận chiều, đường thênh thang",
+    "Chúc bạn yêu đời và được yêu",
+    "Happy Birthday to you!",
+    "Make a wish and believe",
+    "Dream big, shine bright",
+    "Wishing you endless joy",
+  ],
+
   // 3 tấm thiệp. photo = đường dẫn ảnh (đặt ảnh vào thư mục images/).
   // Nếu chưa có ảnh, trang sẽ tự hiện hình trái tim thay thế.
   cards: [
@@ -544,6 +595,7 @@ function startCards() {
 
 btnNext3.addEventListener("click", () => {
   showScene("scene-wish");
+  startWishFloat();
   later(() => {
     confetti.burst(window.innerWidth * 0.3, window.innerHeight * 0.5, 90);
     confetti.burst(window.innerWidth * 0.7, window.innerHeight * 0.5, 90);
@@ -554,3 +606,82 @@ btnNext3.addEventListener("click", () => {
    MÀN 5 — MAKE A WISH
    =========================================================== */
 $("#make-wish").addEventListener("click", (e) => confetti.burst(e.clientX, e.clientY, 80));
+
+/* ===========================================================
+   CÂU CHÚC TRÔI TỪ DƯỚI LÊN (trang Make a Wish)
+   Chia màn hình thành các làn dọc; mỗi làn có tốc độ cố định và chỉ thả
+   câu mới khi câu trước đã trôi đủ xa → các câu không bao giờ chồng nhau.
+   =========================================================== */
+const floatBox = $("#wish-float");
+const FLOAT_DURS = [16, 19, 22];   // giây để trôi hết màn hình, mỗi làn một tốc độ
+let floatStarted = false;
+let floatBag = [];
+let floatBusy = [];                // mỗi làn: thời điểm (ms) được thả câu kế tiếp
+let floatLanes = 0;
+ 
+const laneCount = (w) => Math.max(2, Math.min(6, Math.round(w / 230)));
+ 
+function nextFloatWish() {
+  if (!floatBag.length) floatBag = shuffle(CONFIG.floatWishes);
+  return floatBag.pop();
+}
+ 
+// progress: 0..1 = đã trôi sẵn bao nhiêu (dùng để rải câu ngay khi vào trang)
+// staticTop: số px → đặt đứng yên (chế độ giảm chuyển động)
+function placeWish(lane, laneW, H, progress = 0, staticTop = null) {
+  const dur = FLOAT_DURS[lane % FLOAT_DURS.length];
+  const el = h("p", "wf-item", nextFloatWish());
+  el.style.width = laneW * 0.86 + "px";
+  el.style.left = lane * laneW + Math.random() * laneW * 0.14 + "px";
+  el.style.setProperty("--o", (0.33 + Math.random() * 0.12).toFixed(2));  // 0.33 – 0.45 (càng thấp càng trong suốt)
+  el.style.setProperty("--s", (0.92 + Math.random() * 0.22).toFixed(2));
+  el.style.setProperty("--dur", dur + "s");
+  el.style.setProperty("--rise", -(H + 120) + "px");
+  if (progress) el.style.animationDelay = -(progress * dur) + "s";
+  floatBox.append(el);
+ 
+  if (staticTop !== null) {
+    el.classList.add("static");
+    el.style.top = staticTop + "px";
+    return;
+  }
+  el.addEventListener("animationend", () => el.remove());
+  const frac = (el.offsetHeight + 90) / (H + 120);   // quãng cần trôi trước khi thả câu kế
+  floatBusy[lane] = performance.now() + Math.max(0, frac - progress) * dur * 1000;
+}
+ 
+function floatTick() {
+  if (!$("#scene-wish").classList.contains("active")) { floatStarted = false; return; }
+  const W = floatBox.clientWidth;
+  const H = floatBox.clientHeight;
+  const lanes = laneCount(W);
+  if (lanes !== floatLanes) { floatLanes = lanes; floatBusy = new Array(lanes).fill(0); }
+ 
+  const now = performance.now();
+  const free = [];
+  floatBusy.forEach((t, i) => { if (t <= now) free.push(i); });
+  if (free.length && floatBox.childElementCount < 30) {
+    placeWish(free[Math.floor(Math.random() * free.length)], W / lanes, H);
+  }
+  setTimeout(floatTick, 450 + Math.random() * 450);
+}
+ 
+function startWishFloat() {
+  if (floatStarted) return;
+  floatStarted = true;
+  const W = floatBox.clientWidth;
+  const H = floatBox.clientHeight;
+  floatLanes = laneCount(W);
+  floatBusy = new Array(floatLanes).fill(0);
+  const laneW = W / floatLanes;
+ 
+  if (reduceMotion) {
+    for (let l = 0; l < floatLanes; l++) {
+      for (let k = 0; k < 3; k++) placeWish(l, laneW, H, 0, (k + 0.15 + Math.random() * 0.5) * (H / 3));
+    }
+    return;
+  }
+  // Rải sẵn mỗi làn một câu ở các độ cao khác nhau để vào trang là thấy ngay
+  for (let l = 0; l < floatLanes; l++) placeWish(l, laneW, H, 0.1 + Math.random() * 0.65);
+  setTimeout(floatTick, 400);
+}
