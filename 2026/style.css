@@ -458,6 +458,7 @@ main { position: relative; }
 /* ---------- Màn 5: Make a Wish ---------- */
 .wish-art {
   position: relative;
+  z-index: 2;
   width: min(820px, 94vw);
   cursor: pointer;
   animation: rise 1.3s 0.2s both cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -466,23 +467,26 @@ main { position: relative; }
   margin: 0;
   font-family: var(--f-display);
   font-weight: 400;
-  font-size: clamp(60px, 13vw, 170px);
+  font-size: clamp(72px, 13vw, 170px);
   line-height: 1;
   text-align: left;
   color: var(--ink);
+  /* vầng sáng màu nền: tách tiêu đề khỏi các câu chúc mờ trôi phía sau */
+  text-shadow: 0 0 6px var(--bg), 0 0 10px var(--bg), 0 0 20px var(--bg);
 }
 .wish-title .line { display: block; white-space: nowrap; }
 .wl1 { padding-left: 6%; }
 .wl2 { padding-left: 38%; margin-top: 0.1em; }
-
+ 
 .wish-cake {
   position: absolute;
-  right: 8%;
+  left: 85%;
   top: 0;
   width: clamp(64px, 10vw, 120px);
 }
 .wish-art .env-set { left: 4%; top: 52%; }
 .wish-cap {
+  text-shadow: 0 0 6px var(--bg), 0 0 10px var(--bg), 0 0 16px var(--bg);
   margin: 0.5em 0 0 38%;
   font-family: var(--f-hand);
   font-weight: 500;
@@ -491,19 +495,57 @@ main { position: relative; }
   text-align: left;
   color: var(--ink);
 }
-
+ 
+/* ---------- Câu chúc trôi từ dưới lên (trang Make a Wish) ---------- */
+.wish-float {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.wf-item {
+  position: absolute;
+  top: 100%;
+  margin: 0;
+  font-family: var(--f-body);
+  font-style: italic;
+  font-weight: 500;
+  font-size: calc(clamp(16px, 1.7vw, 22px) * var(--s, 1));
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--maroon);
+  opacity: 0;
+  user-select: none;
+  will-change: transform, opacity;
+  animation: wfRise var(--dur, 18s) linear forwards;
+}
+/* --o = độ đậm tối đa của từng câu (thấp = trong suốt hơn) */
+@keyframes wfRise {
+  0%   { transform: translateY(0); opacity: 0; }
+  12%  { opacity: var(--o, 0.38); }
+  86%  { opacity: var(--o, 0.38); }
+  100% { transform: translateY(var(--rise, -110vh)); opacity: 0; }
+}
+/* Chế độ giảm chuyển động: câu chúc đứng yên, rải sẵn */
+.wf-item.static { animation: none; opacity: var(--o, 0.38); }
+ 
 /* ---------- Điện thoại ---------- */
 @media (max-width: 560px) {
   .scene { padding: 86px 14px 44px; }
   .choices { gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .l1 { padding-left: 2%; }
   .l2 { padding-left: 14%; }
-  .hero .env-set { left: 0; top: 60%; width: 84px; }
+  .hero { padding-bottom: 76px; }
+  .hero .env-set { left: 2%; top: auto; bottom: 0; width: 88px; }
+  .hearts.low { top: 24px; width: 44px; }
+  .wish-cake { left: 80%; }
   .hero .hat { right: 6%; }
   .wl2 { padding-left: 30%; }
   .wish-art .env-set { top: 58%; width: 96px; }
 }
-
+ 
 /* ---------- Giảm chuyển động ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -512,3 +554,4 @@ main { position: relative; }
     transition-duration: 0.01ms !important;
   }
 }
+ 
