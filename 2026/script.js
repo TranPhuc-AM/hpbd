@@ -15,7 +15,7 @@ const CONFIG = {
 
   // (Tuỳ chọn) tự đặt 3 đáp án sai, dạng ddmmyy, ví dụ ["011004", "100104", "010105"].
   // Để null thì trang tự tạo 3 đáp án sai trông giống đáp án đúng.
-  decoys: null,
+  decoys: ["131004", "111104", "131140"],
 
   // null = tự tính tuổi theo ngày hôm nay; hoặc ghi số, ví dụ 25
   ageOverride: null,
@@ -30,19 +30,19 @@ const CONFIG = {
   // Nếu chưa có ảnh, trang sẽ tự hiện hình trái tim thay thế.
   cards: [
     {
-      title: "Sự nghiệp",
+      title: "Sự nghiệp và Thành công",
       photo: "2026/images/su-nghiep.jpg",
-      wish: "Chúc bạn mỗi sáng thức dậy đều háo hức với việc mình làm. Mong những nỗ lực âm thầm sớm nở thành trái ngọt, mọi cánh cửa bạn gõ đều mở ra chân trời rộng hơn, và ngọn lửa đam mê luôn cháy trong bạn.",
+      wish: "Chúc ní tuổi mới luôn tràn đầy năng lượng, tự tin trên hành trình chinh phục những mục tiêu của mình. Mong mọi nỗ lực đều được đền đáp xứng đáng, mọi dự định đều thuận lợi và ngày càng tỏa sáng, thành công theo cách riêng của mình.",
     },
     {
-      title: "Tuổi trẻ",
+      title: "Tuổi trẻ và Sức sống",
       photo: "2026/images/tuoi-tre.jpg",
-      wish: "Mong bạn giữ mãi trái tim trẻ trung, dám mơ lớn, dám thử, dám vấp ngã rồi đứng dậy cười thật to. Tuổi trẻ đâu nằm ở con số trên chiếc bánh, mà ở cách bạn vẫn tò mò và háo hức với cuộc đời mỗi sớm mai.",
+      wish: "Chúc ní tuổi mới luôn xinh đẹp, rạng rỡ. Mong ní có đủ sức khỏe để tận hưởng cuộc sống, đủ mạnh mẽ để vượt qua thử thách và đủ dịu dàng để cảm nhận những điều tốt đẹp xung quanh. Hãy luôn là phiên bản tuyệt vời nhất của chính mình nhé!",
     },
     {
-      title: "Tình cảm",
+      title: "Tình yêu và Hạnh phúc",
       photo: "2026/images/tinh-cam.jpg",
-      wish: "Chúc bạn luôn được yêu thương và biết yêu thương thật lòng. Mong bên cạnh bạn luôn có những người cùng cười khi bạn vui, ở lại khi bạn mệt, và nhắc bạn rằng bạn xứng đáng với mọi điều dịu dàng nhất.",
+      wish: "Chúc bạn tui luôn được yêu thương, trân trọng và nâng niu. Mong rằng trên hành trình sắp tới, ní sẽ không bỏ lỡ người chân thành với mình, có được mối quan hệ luôn ấm áp và đầy niềm vui. Chúc trái tim ní lúc nào cũng bình yên và hạnh phúc.",
     },
   ],
 };
@@ -52,16 +52,16 @@ const CONFIG = {
 const WRONG = [
   [
     "Ồ, ngày này nghe quen quen nhưng chưa phải đâu nhé!",
-    "Vẫn chưa đúng, nhớ lại ngày bạn chào đời xem nào.",
+    "Vẫn chưa đúng, nhớ lại ngày ní chào đời xem nào.",
     "Ô này vẫn sai nha, đừng vội mà!",
   ],
   [
-    "Hmm, mình nghĩ bạn nhớ nhầm rồi đó.",
-    "Lại sai rồi, bạn đang trêu mình đúng không?",
+    "Hmm, ní nhớ nhầm rồi đó.",
+    "Sai rồi, ní đang giởn hả?",
     "Chưa phải đâu, nhìn kỹ từng con số nhé.",
   ],
   [
-    "Nhìn thì giống mà không phải đâu, cẩn thận nhé!",
+    "Nhìn thì giống mà không phải đâu!",
     "Các con số đang lắc đầu với ô này.",
     "Ô này vẫn không phải, hít một hơi rồi chọn lại nào.",
   ],
@@ -74,7 +74,7 @@ const WRONG = [
 const TEXT = {
   wrongTitle: "! Sai rồi !",
   rightTitle: "Yayy, đúng rồi !!",
-  rightMsg: "Chính xác ngày sinh của bạn rồi.",
+  rightMsg: "Chính xác ngày sinh rồi.",
 };
 
 /* ===========================================================
