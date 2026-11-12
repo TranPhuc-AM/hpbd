@@ -83,7 +83,7 @@ const CONFIG = {
     {
       title: "Thành công",
       photo: "2026/images/su-nghiep.jpg",
-      wish: "Chúc ní tuổi mới luôn tràn đầy năng lượng, tự tin trên hành trình chinh phục những mục tiêu của mình. Mong mọi nỗ lực đều được đền đáp xứng đáng, mọi dự định đều thuận lợi và ngày càng tỏa sáng, thành công theo cách riêng của mình.",
+      wish: "Chúc bạn tui tuổi mới luôn tràn đầy năng lượng, tự tin trên hành trình chinh phục những mục tiêu của mình. Mong mọi nỗ lực đều được đền đáp xứng đáng, mọi dự định đều thuận lợi và ngày càng tỏa sáng, thành công theo cách riêng của mình.",
     },
     {
       title: "Tuổi trẻ",
@@ -613,7 +613,7 @@ $("#make-wish").addEventListener("click", (e) => confetti.burst(e.clientX, e.cli
    câu mới khi câu trước đã trôi đủ xa → các câu không bao giờ chồng nhau.
    =========================================================== */
 const floatBox = $("#wish-float");
-const FLOAT_DURS = [16, 19, 22];   // giây để trôi hết màn hình, mỗi làn một tốc độ
+const FLOAT_DURS = [13, 16, 19, 10];   // giây để trôi hết màn hình, mỗi làn một tốc độ
 let floatStarted = false;
 let floatBag = [];
 let floatBusy = [];                // mỗi làn: thời điểm (ms) được thả câu kế tiếp
