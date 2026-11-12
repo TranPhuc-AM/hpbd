@@ -81,17 +81,17 @@ const CONFIG = {
   // Nếu chưa có ảnh, trang sẽ tự hiện hình trái tim thay thế.
   cards: [
     {
-      title: "Sự nghiệp và Thành công",
+      title: "Thành công",
       photo: "2026/images/su-nghiep.jpg",
       wish: "Chúc ní tuổi mới luôn tràn đầy năng lượng, tự tin trên hành trình chinh phục những mục tiêu của mình. Mong mọi nỗ lực đều được đền đáp xứng đáng, mọi dự định đều thuận lợi và ngày càng tỏa sáng, thành công theo cách riêng của mình.",
     },
     {
-      title: "Tuổi trẻ và Sức sống",
+      title: "Tuổi trẻ",
       photo: "2026/images/tuoi-tre.jpg",
       wish: "Chúc ní tuổi mới luôn xinh đẹp, rạng rỡ. Mong ní có đủ sức khỏe để tận hưởng cuộc sống, đủ mạnh mẽ để vượt qua thử thách và đủ dịu dàng để cảm nhận những điều tốt đẹp xung quanh. Hãy luôn là phiên bản tuyệt vời nhất của chính mình nhé!",
     },
     {
-      title: "Tình yêu và Hạnh phúc",
+      title: "Hạnh phúc",
       photo: "2026/images/tinh-cam.jpg",
       wish: "Chúc bạn tui luôn được yêu thương, trân trọng và nâng niu. Mong rằng trên hành trình sắp tới, ní sẽ không bỏ lỡ người chân thành với mình, có được mối quan hệ luôn ấm áp và đầy niềm vui. Chúc trái tim ní lúc nào cũng bình yên và hạnh phúc.",
     },
