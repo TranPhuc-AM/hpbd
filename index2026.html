@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Bird Day</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="2026/style.css">
+  <script src="2026/script.js" defer></script>
+</head>
+<body>
+
+  <!-- Bộ hình trang trí dùng lại nhiều nơi -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="clip-hat"><path d="M40 12 L74 96 H6 Z"/></clipPath>
+    </defs>
+
+    <!-- nón sinh nhật -->
+    <symbol id="i-hat" viewBox="0 0 80 104">
+      <g clip-path="url(#clip-hat)">
+        <rect width="80" height="104" fill="#dcb872"/>
+        <path d="M0 36 L80 10 V24 L0 50Z" fill="#5a1219"/>
+        <path d="M0 60 L80 34 V48 L0 74Z" fill="#5a1219"/>
+        <path d="M0 84 L80 58 V72 L0 98Z" fill="#5a1219"/>
+      </g>
+      <path d="M6 96 Q40 104 74 96" fill="none" stroke="#5a1219" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="10" r="7" fill="#3a1015"/>
+    </symbol>
+
+    <!-- phong bì mở -->
+    <symbol id="i-envelope" viewBox="0 0 130 100">
+      <path d="M8 40 L65 6 L122 40 Z" fill="#cfc6b6"/>
+      <rect x="28" y="14" width="74" height="56" fill="#f5f0e6" stroke="#d8cfbf"/>
+      <path d="M8 40 L65 74 L122 40 V94 H8 Z" fill="#d9d0c0"/>
+      <path d="M8 40 L65 74 L122 40" fill="none" stroke="#b9ae9a" stroke-width="2"/>
+      <path d="M8 94 L50 62 M122 94 L80 62" fill="none" stroke="#b9ae9a" stroke-width="2"/>
+    </symbol>
+
+    <!-- lông vũ -->
+    <symbol id="i-feather" viewBox="0 0 44 140">
+      <path d="M36 4 C14 26 6 66 14 112 C28 84 44 42 36 4 Z" fill="#3c3a39"/>
+      <path d="M36 4 C22 40 16 78 14 112" fill="none" stroke="#8d8a86" stroke-width="1.6"/>
+      <path d="M14 112 L6 136" stroke="#6b6865" stroke-width="2" stroke-linecap="round"/>
+      <path d="M28 30 L36 34 M24 48 L34 50 M20 66 L30 66 M18 84 L26 82" stroke="#8d8a86" stroke-width="1" opacity=".7"/>
+    </symbol>
+
+    <!-- cụm trái tim -->
+    <symbol id="i-hearts" viewBox="0 0 110 100">
+      <g fill="currentColor">
+        <path d="M30 52 C6 36 12 12 30 20 C46 10 56 34 30 52Z" transform="rotate(-18 30 36)"/>
+        <path d="M78 40 C58 26 62 8 78 14 C92 6 100 28 78 40Z" transform="rotate(14 78 26)"/>
+        <path d="M60 92 C40 78 46 60 60 66 C74 58 82 80 60 92Z" transform="rotate(-6 60 76)"/>
+      </g>
+    </symbol>
+
+    <!-- ổ khoá hình trái tim -->
+    <symbol id="i-lock" viewBox="0 0 60 76">
+      <path d="M18 32 V20 a12 12 0 0 1 24 0 V32" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      <path d="M30 70 C4 50 6 32 20 32 C26 32 30 36 30 40 C30 36 34 32 40 32 C54 32 56 50 30 70Z" fill="currentColor"/>
+      <circle cx="30" cy="48" r="4" fill="#fbfaf7"/>
+      <rect x="28.4" y="50" width="3.2" height="9" rx="1.4" fill="#fbfaf7"/>
+    </symbol>
+
+    <!-- mặt buồn / mặt vui -->
+    <symbol id="i-sad" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5"/>
+      <ellipse cx="36" cy="40" rx="5" ry="7" fill="currentColor"/>
+      <ellipse cx="64" cy="40" rx="5" ry="7" fill="currentColor"/>
+      <path d="M30 72 Q50 52 70 72" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-happy" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5"/>
+      <ellipse cx="36" cy="40" rx="5" ry="7" fill="currentColor"/>
+      <ellipse cx="64" cy="40" rx="5" ry="7" fill="currentColor"/>
+      <path d="M28 58 Q50 82 72 58" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <!-- Pháo giấy -->
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <main>
+
+    <!-- ============ MÀN 1: Happy Bird Day ============ -->
+    <section class="scene active" id="scene-intro">
+      <button class="pill pill-next at-right" id="btn-next-1" type="button">Next <span aria-hidden="true">→</span></button>
+
+      <div class="hero">
+        <h1 class="hero-title" id="hero-title" aria-label="Happy Bird Day">
+          <span class="line l1" id="hero-l1">Happy</span>
+          <span class="line l2" id="hero-l2">Bird Day</span>
+        </h1>
+        <svg class="deco hat" viewBox="0 0 80 104" aria-hidden="true"><use href="#i-hat"/></svg>
+        <div class="env-set" aria-hidden="true">
+          <svg class="env" viewBox="0 0 130 100"><use href="#i-envelope"/></svg>
+          <svg class="feather" viewBox="0 0 44 140"><use href="#i-feather"/></svg>
+        </div>
+        <p class="hero-name" id="hero-name"></p>
+      </div>
+
+    </section>
+
+    <!-- ============ MÀN 2: Chọn ngày sinh ============ -->
+    <section class="scene" id="scene-key">
+      <svg class="deco lock l-left" viewBox="0 0 60 76" aria-hidden="true"><use href="#i-lock"/></svg>
+      <svg class="deco lock l-right" viewBox="0 0 60 76" aria-hidden="true"><use href="#i-lock"/></svg>
+
+      <h2 class="sec-title" data-swash>Chọn Ngày Sinh</h2>
+      <p class="sec-sub">để mở quà</p>
+
+      <div class="choices" id="choices" role="group" aria-label="Chọn ngày sinh"></div>
+
+      <!-- hộp thoại đúng / sai -->
+      <div class="modal" id="modal" hidden>
+        <div class="modal-card" role="alertdialog" aria-modal="true" aria-labelledby="modal-title">
+          <svg class="modal-ic" viewBox="0 0 100 100" aria-hidden="true"><use id="modal-use" href="#i-sad"/></svg>
+          <p class="modal-title" id="modal-title"></p>
+          <p class="modal-msg" id="modal-msg"></p>
+          <button class="pill pill-light" id="modal-btn" type="button">Back</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MÀN 3: Số tuổi + bánh kem ============ -->
+    <section class="scene" id="scene-age">
+      <button class="pill pill-next at-center is-hidden" id="btn-next-2" type="button">Next <span aria-hidden="true">→</span></button>
+      <svg class="deco hearts tl" viewBox="0 0 110 100" aria-hidden="true"><use href="#i-hearts"/></svg>
+      <svg class="deco hearts tr" viewBox="0 0 110 100" aria-hidden="true"><use href="#i-hearts"/></svg>
+
+      <div class="age-art">
+        <p class="age-num" id="age-num">0</p>
+        <svg class="age-hat" viewBox="0 0 80 104" aria-hidden="true"><use href="#i-hat"/></svg>
+        <button class="age-cake cake" id="cake" type="button" aria-label="Thổi nến"></button>
+      </div>
+
+      <h2 class="hb" id="age-greeting">Happy Bird Day</h2>
+      <p class="age-caption" id="age-caption">My Favorite Person!</p>
+      <p class="hint is-hidden" id="cake-hint">Chạm vào bánh để thổi nến</p>
+    </section>
+
+    <!-- ============ MÀN 4: 3 tấm thiệp ============ -->
+    <section class="scene" id="scene-cards">
+      <svg class="deco hearts low tl" viewBox="0 0 110 100" aria-hidden="true"><use href="#i-hearts"/></svg>
+      <svg class="deco hearts low tr" viewBox="0 0 110 100" aria-hidden="true"><use href="#i-hearts"/></svg>
+
+      <h2 class="sec-title" data-swash>Những lời chúc dành cho bạn</h2>
+      <p class="hint is-hidden" id="cards-hint">Chạm vào từng tấm thiệp để mở lời chúc</p>
+      <div class="cards" id="cards"></div>
+      <button class="pill pill-next at-center is-hidden" id="btn-next-3" type="button">Next <span aria-hidden="true">→</span></button>
+    </section>
+
+    <!-- ============ MÀN 5: Make a Wish ============ -->
+    <section class="scene" id="scene-wish">
+      <div class="wish-art" id="make-wish">
+        <h2 class="wish-title" aria-label="Make a Wish">
+          <span class="line wl1" data-swash>Make a</span>
+          <span class="line wl2" data-swash>Wish</span>
+        </h2>
+        <div class="wish-cake" id="wish-cake" aria-hidden="true"></div>
+        <div class="env-set" aria-hidden="true">
+          <svg class="env" viewBox="0 0 130 100"><use href="#i-envelope"/></svg>
+          <svg class="feather" viewBox="0 0 44 140"><use href="#i-feather"/></svg>
+        </div>
+        <p class="wish-cap" id="wish-cap">Happy Bird Day</p>
+      <p class="tagline">“Any dream can come true if you dare to pursue it”</p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
