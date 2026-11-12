@@ -31,17 +31,17 @@ const CONFIG = {
   cards: [
     {
       title: "Sự nghiệp",
-      photo: "images/su-nghiep.jpg",
+      photo: "2026/images/su-nghiep.jpg",
       wish: "Chúc bạn mỗi sáng thức dậy đều háo hức với việc mình làm. Mong những nỗ lực âm thầm sớm nở thành trái ngọt, mọi cánh cửa bạn gõ đều mở ra chân trời rộng hơn, và ngọn lửa đam mê luôn cháy trong bạn.",
     },
     {
       title: "Tuổi trẻ",
-      photo: "images/tuoi-tre.jpg",
+      photo: "2026/images/tuoi-tre.jpg",
       wish: "Mong bạn giữ mãi trái tim trẻ trung, dám mơ lớn, dám thử, dám vấp ngã rồi đứng dậy cười thật to. Tuổi trẻ đâu nằm ở con số trên chiếc bánh, mà ở cách bạn vẫn tò mò và háo hức với cuộc đời mỗi sớm mai.",
     },
     {
       title: "Tình cảm",
-      photo: "images/tinh-cam.jpg",
+      photo: "2026/images/tinh-cam.jpg",
       wish: "Chúc bạn luôn được yêu thương và biết yêu thương thật lòng. Mong bên cạnh bạn luôn có những người cùng cười khi bạn vui, ở lại khi bạn mệt, và nhắc bạn rằng bạn xứng đáng với mọi điều dịu dàng nhất.",
     },
   ],
